@@ -4,7 +4,7 @@ import streamlit as st
 def main():
     # builds the sidebar menu
     with st.sidebar:
-        st.page_link('demand_drivers.py', label='Demand Drivers', icon='📈')
+        st.page_link('pages/demand_drivers.py', label='Demand Drivers', icon='📈')
         st.page_link('pages/burn.py', label='Token Burn', icon='🔥')
         st.page_link('pages/fee_discounts.py', label='Fee Discounts', icon='💰')
 
