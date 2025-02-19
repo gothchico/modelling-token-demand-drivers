@@ -9,6 +9,9 @@ Modeling the demand drivers for an AMM DEX token.
 This simulation computes the projected token supply and estimated dollar value generated over time (in months) for selected demand drivers.
 """)
 
+
+st.sidebar.header("Demand Drivers")
+
 init_supply = st.number_input("Initial Supply", value=1_000_000)
 TGE_price = float(st.text_input("TGE Token Price", value='2'))
 revenue_growth_rate = st.slider("Revenue Growth Rate month over month (m-o-m)", 
@@ -52,3 +55,4 @@ progress_bar.empty()
 # this button is not connected to any other logic, it just causes a plain
 # rerun.
 st.button("Re-run")
+
