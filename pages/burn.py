@@ -3,14 +3,13 @@ import pandas as pd
 import numpy as np
 
 params = st.session_state.get("params")
-
+discount_factor = 0.9
 def simulate_buyback_burn(S0, TGE_price, initial_revenue, beta, revenue_growth_rate, price_growth_rate, target_revenue, use_target_revenue, months):
     supply = np.zeros(months)
     supply[0] = S0
     P_t = TGE_price
     R_t = initial_revenue
     demand_value = np.zeros(months)
-    discount_factor = 0.95
     for t in range(1, months):
         P_t *= (1 + price_growth_rate)
         if use_target_revenue:
@@ -26,7 +25,7 @@ def simulate_exponential(S0, lambda_burn, months, TGE_price):
     supply = np.zeros(months)
     demand_value = np.zeros(months)
     lambda_burn = lambda_burn*0.01
-    discount_factor = 0.95
+    # discount_factor = 0.95
     for t in range(months):
         supply[t] = S0 * np.exp(-lambda_burn * t)
         supply[t] = max(supply[t], 0)
@@ -36,7 +35,7 @@ def simulate_exponential(S0, lambda_burn, months, TGE_price):
 def simulate_logarithmic(S0, alpha, months, TGE_price):
     supply = np.zeros(months)
     demand_value = np.zeros(months)
-    discount_factor = 0.95
+    # discount_factor = 0.95
     for t in range(months):
         supply[t] = S0 - alpha * np.log(1 + t)
         supply[t] = max(supply[t], 0)
@@ -46,7 +45,7 @@ def simulate_logarithmic(S0, alpha, months, TGE_price):
 def simulate_schedule(S0, burn_schedule, months, TGE_price):
     supply = np.zeros(months)
     demand_value = np.zeros(months)
-    discount_factor = 0.95
+    # discount_factor = 0.95
     supply[0] = S0
     for t in range(1, months):
         if burn_schedule and t in burn_schedule:
@@ -99,23 +98,27 @@ if selected_burn_model == "Logarithmic Burn":
     alpha = st.number_input("Logarithmic Burn Rate", value=50_000, step=1000)
 if selected_burn_model == "Schedule-Based Burn":
     schedule_rate = st.slider("Schedule Burn Rate", min_value=0.0, max_value=0.1, value=0.01)
-    schedule_interval = st.number_input("Schedule Interval", min_value=1, max_value=params.months, value=5)
-    burn_schedule = {m: schedule_rate for m in range(schedule_interval, int(params.months), int(schedule_interval))}
-
+    schedule_interval = st.number_input("Schedule Interval", min_value=1, max_value=params["months"], value=5)
+    burn_schedule = {m: schedule_rate for m in range(schedule_interval, int(params["months"]), int(schedule_interval))}
+print(params)
 params = {
-    "S0": params.init_supply,
-    "TGE_price": params.TGE_price,
-    "initial_revenue": params.initial_revenue,
+    "S0": params["init_supply"],
+    "TGE_price": params["TGE_price"],
+    "initial_revenue": params["initial_revenue"],
     "beta": beta,
     "lambda_burn": lambda_burn,
     "alpha": alpha,
     "burn_schedule": burn_schedule,
-    "revenue_growth_rate": params.revenue_growth_rate,
+    "revenue_growth_rate": params["revenue_growth_rate"],
     "price_growth_rate": 0.03,
-    "target_revenue": params.target_revenue,
-    "use_target_revenue": params.use_target_revenue,
-    "months": params.months
+    "target_revenue": params["target_revenue"],
+    "use_target_revenue": params["use_target_revenue"],
+    "months": params["months"]
 }
+
+def format_as_dollar_million(number):
+    millions = number / 1_000_000
+    return "${:,.2f}M".format(millions)
 
 df_sim = simulate_supply(selected_burn_model, params)
 df_renamed = df_sim.rename(columns={
@@ -133,3 +136,4 @@ if not df_sim.empty:
     st.bar_chart(df_renamed, x="months", y="supply", use_container_width=True)
     st.bar_chart(df_renamed, x="months", y="estimated demand dollar value", use_container_width=True)
     st.metric(label=f"{selected_burn_model} Final Supply", value=f"{df_sim['Supply'].iloc[-1]:,.0f}")
+    st.metric(label=f"{selected_burn_model} Total Demand Generated", value=format_as_dollar_million(df_sim['Demand Value'].sum()))

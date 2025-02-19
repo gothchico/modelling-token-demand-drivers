@@ -21,7 +21,7 @@ This simulation models the impact of fee discounts on trading volume and token d
 # st.markdown("# Fee Discounts")
 st.sidebar.header("Fee Discounts")
 st.sidebar.progress(100)
-st.sidebar.text("%i%% Complete" % 100)
+st.sidebar.text("%i%% Complete" % 50)
 # st.markdown("""
 # Modeling the demand generated for a token that enables fee discounts.
 # This simulation computes the projected token supply and estimated dollar value of the demand generated over time (in months) for a fee discount model.
