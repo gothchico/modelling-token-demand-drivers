@@ -20,7 +20,7 @@ for i in range(1, 101):
     chart.add_rows(new_rows)
     progress_bar.progress(i)
     last_rows = new_rows
-    time.sleep(0.05)
+    time.sleep(0.01)
 
 progress_bar.empty()
 
