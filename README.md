@@ -1,51 +1,19 @@
+# :earth_americas: Token Demand Drivers Modelling
 
-# How to create a multi-page streamlit web app
-From `streamlit version 1.10` onwards, you can now create native streamlit multipage web apps. In this tutorial, I will walk you through an example of how to develop such a streamlit multipage web app. In particular, I will show you how to add multiple pages, including favicons and how to use the streamlit session state to share variables/values between pages.<br/>
-To follow along, ensure to use the latest streamlit version by running `pip install streamlit --upgrade`<br/><br/>
-👉 Also, check out the official streamlit documentation: https://docs.streamlit.io/library/get-started/multipage-apps/create-a-multipage-app
+A simple app showing the modelling of different demand drivers of a token.
 
-## Video Tutorial
-[![YouTube Video](https://img.youtube.com/vi/YClmpnpszq8/0.jpg)](https://youtu.be/YClmpnpszq8)
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://modelling-token-demand-drivers.streamlit.app/)
 
-## Requirements
-Install the dependecies with pip
-```
-streamlit==1.11.0
-```
+### How to run it on your own machine
 
-## Usage
-```python
-# [Vanilla Terminal] Run the application
-streamlit run 1_🤓_Homepage.py
-```
+1. Install the requirements
 
+   ```
+   $ pip install -r requirements.txt
+   ```
 
+2. Run the app
 
-## 🤓 Check Out My Excel Add-ins
-I've developed some handy Excel add-ins that you might find useful:
-
-- 📊 **[Dashboard Add-in](https://pythonandvba.com/grafly)**: Easily create interactive and visually appealing dashboards.
-- 🎨 **[Cartoon Charts Add-In](https://pythonandvba.com/cuteplots)**: Create engaging and fun cartoon-style charts.
-- 🤪 **[Emoji Add-in](https://pythonandvba.com/emojify)**: Add a touch of fun to your spreadsheets with emojis.
-- 🛠️ **[MyToolBelt Add-in](https://pythonandvba.com/mytoolbelt)**: A versatile toolbelt for Excel, featuring:
-  - Creation of Pandas DataFrames and Jupyter Notebooks from Excel ranges
-  - ChatGPT integration for advanced data analysis
-  - And much more!
-
-
-
-## 🤝 Connect with Me
-- 📺 **YouTube:** [CodingIsFun](https://youtube.com/c/CodingIsFun)
-- 🌐 **Website:** [PythonAndVBA](https://pythonandvba.com)
-- 💬 **Discord:** [Join our Community](https://pythonandvba.com/discord)
-- 💼 **LinkedIn:** [Connect with me](https://www.linkedin.com/in/sven-bosau/)
-- 📸 **Instagram:** [Follow me](https://www.instagram.com/codingisfun_official/)
-
-## Support My Work
-Love my content and want to show appreciation? Why not [buy me a coffee](https://pythonandvba.com/coffee-donation) to fuel my creative engine? Your support means the world to me! 😊
-
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://pythonandvba.com/coffee-donation)
-
-## Feedback
-Got some thoughts or suggestions? Don't hesitate to reach out to me at contact@pythonandvba.com. I'd love to hear from you! 💡
-![Logo](https://www.pythonandvba.com/banner-img)
+   ```
+   $ streamlit run Demand_Drivers.py
+   ```
