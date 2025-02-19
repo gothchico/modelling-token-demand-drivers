@@ -69,10 +69,14 @@ def simulate_supply(model, params):
     else:
         return pd.DataFrame(columns=["Month", "Supply", "Demand Value"])
 
-st.title("Token Demand Drivers Modelling")
+st.set_page_config(page_title="Token Burn", page_icon="📈")
+st.markdown("# Token Burn")
+st.sidebar.header("Token Burn")
+st.sidebar.progress(100)
+st.sidebar.text("%i%% Complete" % 100)
 st.markdown("""
-Modeling the demand drivers for an AMM DEX token.
-This simulation computes the projected token supply and estimated dollar value generated over time (in months) for selected burn models.
+Modeling the token burn.
+This simulation computes the projected token supply and estimated dollar value generated over time (in months) for selected burn model.
 """)
 
 init_supply = st.number_input("Initial Supply", value=1_000_000)

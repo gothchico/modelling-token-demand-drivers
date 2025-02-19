@@ -1,8 +1,8 @@
 # :earth_americas: Token Demand Drivers Modelling
 
-A simple Streamlit app showing the modelling of different demand drivers of a token.
+A simple app showing the modelling of different demand drivers of a token.
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://gdp-dashboard-template.streamlit.app/)
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://modelling-token-demand-drivers.streamlit.app/)
 
 ### How to run it on your own machine
 
