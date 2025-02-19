@@ -28,3 +28,27 @@ progress_bar.empty()
 # this button is not connected to any other logic, it just causes a plain
 # rerun.
 st.button("Re-run")
+
+init_supply = st.number_input("Initial Supply", value=1_000_000)
+TGE_price = float(st.text_input("TGE Token Price", value='2'))
+revenue_growth_rate = st.slider("Revenue Growth Rate month over month (m-o-m)", 
+                                min_value=0.0, max_value=0.1, value=0.02)
+use_target_revenue = st.toggle("Use Target Revenue", value=False)
+if use_target_revenue:
+    target_revenue = float(st.text_input("Target Revenue", value='300000'))
+    initial_revenue = 20_000
+else:
+    initial_revenue = float(st.text_input("Initial Revenue", value='20000'))
+    target_revenue = None
+months = st.number_input("Number of Months", value=60)
+
+params = {
+    "init_supply": init_supply,
+    "TGE_price": TGE_price,
+    "initial_revenue": initial_revenue,
+    "revenue_growth_rate": revenue_growth_rate,
+    "use_target_revenue": use_target_revenue,
+    "target_revenue": target_revenue,
+    "months": months
+}
+st.session_state.params = params

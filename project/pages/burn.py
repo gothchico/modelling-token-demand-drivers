@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
+params = st.session_state.get("params")
+
 def simulate_buyback_burn(S0, TGE_price, initial_revenue, beta, revenue_growth_rate, price_growth_rate, target_revenue, use_target_revenue, months):
     supply = np.zeros(months)
     supply[0] = S0
@@ -79,18 +81,6 @@ Modeling the token burn.
 This simulation computes the projected token supply and estimated dollar value generated over time (in months) for selected burn model.
 """)
 
-init_supply = st.number_input("Initial Supply", value=1_000_000)
-TGE_price = float(st.text_input("TGE Token Price", value='2'))
-revenue_growth_rate = st.slider("Revenue Growth Rate month over month (m-o-m)", 
-                                min_value=0.0, max_value=0.1, value=0.02)
-use_target_revenue = st.toggle("Use Target Revenue", value=False)
-if use_target_revenue:
-    target_revenue = float(st.text_input("Target Revenue", value='300000'))
-    initial_revenue = 20_000
-else:
-    initial_revenue = float(st.text_input("Initial Revenue", value='20000'))
-    target_revenue = None
-months = st.number_input("Number of Months", value=60)
 
 burn_model_options = [
     "Buyback + Burn Model",
@@ -109,22 +99,22 @@ if selected_burn_model == "Logarithmic Burn":
     alpha = st.number_input("Logarithmic Burn Rate", value=50_000, step=1000)
 if selected_burn_model == "Schedule-Based Burn":
     schedule_rate = st.slider("Schedule Burn Rate", min_value=0.0, max_value=0.1, value=0.01)
-    schedule_interval = st.number_input("Schedule Interval", min_value=1, max_value=months, value=5)
-    burn_schedule = {m: schedule_rate for m in range(schedule_interval, int(months), int(schedule_interval))}
+    schedule_interval = st.number_input("Schedule Interval", min_value=1, max_value=params.months, value=5)
+    burn_schedule = {m: schedule_rate for m in range(schedule_interval, int(params.months), int(schedule_interval))}
 
 params = {
-    "S0": init_supply,
-    "TGE_price": TGE_price,
-    "initial_revenue": initial_revenue,
+    "S0": params.init_supply,
+    "TGE_price": params.TGE_price,
+    "initial_revenue": params.initial_revenue,
     "beta": beta,
     "lambda_burn": lambda_burn,
     "alpha": alpha,
     "burn_schedule": burn_schedule,
-    "revenue_growth_rate": revenue_growth_rate,
+    "revenue_growth_rate": params.revenue_growth_rate,
     "price_growth_rate": 0.03,
-    "target_revenue": target_revenue,
-    "use_target_revenue": use_target_revenue,
-    "months": months
+    "target_revenue": params.target_revenue,
+    "use_target_revenue": params.use_target_revenue,
+    "months": params.months
 }
 
 df_sim = simulate_supply(selected_burn_model, params)
@@ -136,8 +126,10 @@ df_renamed = df_sim.rename(columns={
 if not df_sim.empty:
     col1, col2 = st.columns(2)
     st.line_chart(df_sim.set_index("Month")[["Supply", "Demand Value"]])
-    with col1:
-        st.bar_chart(df_renamed, x="months", y="supply", use_container_width=True)
-    with col2:
-        st.bar_chart(df_renamed, x="months", y="estimated demand dollar value", use_container_width=True)
+    # with col1:
+    #     st.bar_chart(df_renamed, x="months", y="supply", use_container_width=True)
+    # with col2:
+        # st.bar_chart(df_renamed, x="months", y="estimated demand dollar value", use_container_width=True)
+    st.bar_chart(df_renamed, x="months", y="supply", use_container_width=True)
+    st.bar_chart(df_renamed, x="months", y="estimated demand dollar value", use_container_width=True)
     st.metric(label=f"{selected_burn_model} Final Supply", value=f"{df_sim['Supply'].iloc[-1]:,.0f}")
