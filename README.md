@@ -1,6 +1,6 @@
-# :earth_americas: GDP dashboard template
+# :earth_americas: Token Demand Drivers Modelling
 
-A simple Streamlit app showing the GDP of different countries in the world.
+A simple Streamlit app showing the modelling of different demand drivers of a token.
 
 [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://gdp-dashboard-template.streamlit.app/)
 
