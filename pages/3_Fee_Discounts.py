@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-# st.set_page_config(page_title="Fee Discount Simulation", page_icon="📊")
 st.title("Modeling Fee Discounts on a DEX as a Demand Driver")
 st.markdown("""
 This simulation models the impact of fee discounts on trading volume and token demand.
@@ -102,7 +101,4 @@ if staking_toggle:
     
     st.line_chart(df_staking.set_index("Month"))
     st.metric("Final Demand Generated", f"{demand_generated[-1]:,.0f}")
-
-
-
 

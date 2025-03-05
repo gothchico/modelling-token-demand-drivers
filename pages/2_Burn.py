@@ -70,7 +70,6 @@ def simulate_supply(model, params):
     else:
         return pd.DataFrame(columns=["Month", "Supply", "Demand Value"])
 
-st.set_page_config(page_title="Token Burn", page_icon="📈")
 st.markdown("# Token Burn")
 st.sidebar.header("Token Burn")
 st.sidebar.progress(100)

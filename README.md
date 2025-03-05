@@ -15,5 +15,5 @@ A simple app showing the modelling of different demand drivers of a token.
 2. Run the app
 
    ```
-   $ streamlit run streamlit_app.py
+   $ streamlit run Demand_Drivers.py
    ```
