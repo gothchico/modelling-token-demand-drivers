@@ -90,7 +90,7 @@ selected_burn_model = st.selectbox("Select Burn Model to Simulate", options=burn
 
 delta = beta = lambda_burn = alpha = burn_schedule = None
 if selected_burn_model == "Buyback + Burn Model":
-    beta = st.slider("Buyback Rate", min_value=0.0, max_value=1.0, value=0.5)
+    beta = st.slider("Buyback Rate", min_value=0.0, max_value=1.0, value=0.2)
 if selected_burn_model == "Exponential Decay":
     lambda_burn = st.slider("Exponential Decay Rate", min_value=0.0, max_value=1.0, value=0.5)
 if selected_burn_model == "Logarithmic Burn":

@@ -5,23 +5,24 @@ import time
 
 st.title("Token Demand Drivers Modelling")
 st.markdown("""
-Modeling the demand drivers for an AMM DEX token.
-This simulation computes the projected token supply and estimated dollar value generated over time (in months) for selected demand drivers.
+Modeling the demand drivers for an AMM DEX token: CDX
+We quantify the demand generated through this token's utilities
+This simulation computes estimated dollar value generated over time (in months) for selected demand drivers
 """)
 
 
 st.sidebar.header("Demand Drivers")
 
-init_supply = st.number_input("Initial Supply", value=1_000_000)
-TGE_price = float(st.text_input("TGE Token Price", value='2'))
-revenue_growth_rate = st.slider("Revenue Growth Rate month over month (m-o-m)", 
+init_supply = st.number_input("Initial Token Supply", value=1_000_000)
+TGE_price = float(st.text_input("Token Price at TGE", value='4'))
+revenue_growth_rate = st.slider("Revenue Growth Rate: Month over Month (m-o-m)", 
                                 min_value=0.0, max_value=0.1, value=0.02)
 use_target_revenue = st.toggle("Use Target Revenue", value=False)
 if use_target_revenue:
-    target_revenue = float(st.text_input("Target Revenue", value='300000'))
-    initial_revenue = 20_000
+    target_revenue = float(st.text_input("Target Monthly Revenue", value='3000000'))
+    initial_revenue = 200_000
 else:
-    initial_revenue = float(st.text_input("Initial Revenue", value='20000'))
+    initial_revenue = float(st.text_input("Initial Monthly Revenue", value='200000'))
     target_revenue = None
 months = st.number_input("Number of Months", value=60)
 

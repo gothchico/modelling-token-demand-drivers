@@ -8,10 +8,5 @@ def main():
         st.page_link('pages/2_Burn.py', label='Token Burn', icon='🔥')
         st.page_link('pages/3_Fee_Discounts.py', label='Fee Discounts', icon='💰')
 
-    st.title(f'📈 Demand Drivers')
-
-    # your content
-
-
 if __name__ == '__main__':
     main()
